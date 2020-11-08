@@ -3,10 +3,16 @@
 
 import React from 'react'
 
+// pass a function to debug as formatter, so it is only run when the dev tools are open
+function debugFormatter({ query, state }) {
+  return `\`${query}\` => ${state}`
+}
+
 function useMedia(query, initialState = false) {
   const [state, setState] = React.useState(initialState)
   // 🐨 call React.useDebugValue here.
   // 💰 here's the formatted label I use: `\`${query}\` => ${state}`
+  React.useDebugValue({query, state}, debugFormatter)
 
   React.useEffect(() => {
     let mounted = true

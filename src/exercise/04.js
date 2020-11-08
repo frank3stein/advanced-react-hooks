@@ -5,8 +5,10 @@ import React from 'react'
 
 function MessagesDisplay({messages}) {
   const containerRef = React.useRef()
-  // 🐨 replace useEffect with useLayoutEffect
-  React.useEffect(() => {
+    // 🐨 replace useEffect with useLayoutEffect
+    // When we need to work with an observable effect that will trigger the paint
+    // we should use this hook, so it does its work before the paint
+  React.useLayoutEffect(() => {
     containerRef.current.scrollTop = containerRef.current.scrollHeight
   })
 
@@ -33,7 +35,7 @@ function SlooooowSibling() {
   // how it impacts interactivity of the page before updates.
   React.useEffect(() => {
     // increase this number to see a more stark difference
-    sleep(300)
+    sleep(1)
   })
   return null
 }
